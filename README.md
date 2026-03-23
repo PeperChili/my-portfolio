@@ -1,20 +1,12 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 刘紫函的个人作品集 (Portfolio)
 
-# Run and deploy your AI Studio app
+这是我的个人作品集网站，展示了我在产品运营、AI 绘画及设计方面的作品。
 
-This contains everything you need to run your app locally.
+## 🚀 技术栈
+* **框架**: Vite + React / HTML
+* **部署**: Vercel
+* **设计工具**: Midjourney, Stable Diffusion, Photoshop
 
-View your app in AI Studio: https://ai.studio/apps/4dad9861-19cc-418f-9e4f-ebc449550557
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 🛠️ 项目特点
+* 响应式设计，适配手机与电脑端。
+* 集成了 AI 生成的视觉元素。
