@@ -22,14 +22,19 @@ export const Works: React.FC = () => {
       const videoEl = videoRefs.current[work.id];
       if (videoEl && work.video) {
         if (hoveredId === work.id) {
+          // 只有在源地址被赋予后，才进行加载和播放
+          videoEl.load();
           // 当悬浮时，播放视频，并在3秒后重置回开头
           videoEl.currentTime = 0;
-          videoEl.play().catch(e => console.log("Video play failed:", e));
+          const playPromise = videoEl.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(e => console.log("Video play failed:", e));
+          }
           
           const timeoutId = setTimeout(() => {
             if (hoveredId === work.id) {
               videoEl.currentTime = 0;
-              videoEl.play(); // 3秒后重新开始播放，实现3s循环
+              videoEl.play().catch(e => console.log("Video replay failed:", e)); // 3秒后重新开始播放，实现3s循环
             }
           }, 3000);
           
@@ -118,16 +123,25 @@ export const Works: React.FC = () => {
               <div className={`relative w-full ${work.aspectRatio || 'aspect-[3/4]'}`}>
                 {work.video ? (
                   <>
+                    {/* 使用海报图作为默认显示，并且在悬浮时才加载视频 */}
+                    <img
+                      src={work.image}
+                      alt={work.title}
+                      className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${
+                        hoveredId === work.id ? 'opacity-0 scale-110' : 'opacity-100 scale-100 blur-[4px]'
+                      }`}
+                    />
                     <video
                       ref={el => videoRefs.current[work.id] = el}
-                      src={work.video}
+                      src={hoveredId === work.id ? work.video : ''} // 只有悬浮时才赋予 src，避免初始加载大量视频
+                      poster={work.image}
                       className={`w-full h-full object-cover transition-all duration-700 ease-in-out absolute inset-0 z-10 ${
-                        hoveredId === work.id ? 'scale-110 blur-0' : 'scale-100 blur-[4px]'
+                        hoveredId === work.id ? 'scale-110 opacity-100' : 'scale-100 opacity-0'
                       }`}
                       muted
                       playsInline
                       loop={false}
-                      preload="metadata"
+                      preload="none" // 阻止浏览器预加载视频数据
                     />
                     {/* Play Icon Indicator */}
                     <div className={`absolute top-4 right-4 md:top-6 md:right-6 z-30 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center border border-white/50 transition-opacity duration-300 ${
