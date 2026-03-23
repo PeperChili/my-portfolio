@@ -22,15 +22,15 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-12 py-6 bg-black/80 backdrop-blur-md text-white">
-      <div className="text-2xl font-bold tracking-tight cursor-pointer" onClick={() => handleNavClick('home')}>PeperChili</div>
+    <nav className="fixed top-0 left-0 right-0 z-50 flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-12 py-3 md:py-6 bg-black/80 backdrop-blur-md text-white">
+      <div className="text-xl md:text-2xl font-bold tracking-tight cursor-pointer w-full md:w-auto text-center md:text-left mb-2 md:mb-0" onClick={() => handleNavClick('home')}>PeperChili</div>
       
-      <div className="flex items-center space-x-12">
+      <div className="flex items-center justify-center w-full md:w-auto space-x-6 md:space-x-12 overflow-x-auto scrollbar-hide py-2 md:py-0">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => handleNavClick(tab.id)}
-            className={`relative text-sm font-medium transition-colors duration-300 ${
+            className={`relative whitespace-nowrap text-xs md:text-sm font-medium transition-colors duration-300 ${
               activeTab === tab.id ? 'text-white' : 'text-gray-400 hover:text-white'
             }`}
           >
@@ -46,7 +46,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
         ))}
       </div>
 
-      <div className="relative group">
+      <div className="relative group hidden md:block">
         <a 
           href="/resume.pdf" // 替换为你的简历PDF，放置在 public/resume.pdf
           download="刘紫函_简历.pdf"

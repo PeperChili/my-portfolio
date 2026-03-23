@@ -81,11 +81,11 @@ export const Experience: React.FC<ExperienceProps> = ({ onHover }) => {
   ];
 
   return (
-    <section id="experience" className="min-h-screen pt-32 px-12 pb-24">
-      <div className="max-w-7xl mx-auto scale-80 transform-gpu origin-top">
-        <h2 className="text-4xl font-black mb-16 tracking-tight text-center">实习经历</h2>
+    <section id="experience" className="min-h-screen pt-24 px-6 md:pt-32 md:px-12 pb-24">
+      <div className="max-w-7xl mx-auto scale-100 md:scale-80 transform-gpu origin-top">
+        <h2 className="text-3xl md:text-4xl font-black mb-12 md:mb-16 tracking-tight text-center">实习经历</h2>
         
-        <div className="flex flex-col lg:flex-row gap-6 h-[600px]">
+        <div className="flex flex-col lg:flex-row gap-6 min-h-[600px] lg:h-[600px]">
           {experiences.map((exp) => (
             <motion.div
               key={exp.id}
@@ -98,25 +98,25 @@ export const Experience: React.FC<ExperienceProps> = ({ onHover }) => {
                 onHover('#4285F4'); // Default color
               }}
               layout
-              className={`relative flex-1 rounded-[40px] overflow-hidden cursor-pointer transition-all duration-500 ease-in-out ${
-                hoveredId === exp.id ? 'lg:flex-[3]' : 'lg:flex-1'
+              className={`relative flex-1 min-h-[200px] lg:min-h-0 rounded-[40px] overflow-hidden cursor-pointer transition-all duration-500 ease-in-out ${
+                hoveredId === exp.id ? 'flex-[2] lg:flex-[3]' : 'flex-1'
               } bg-white/40 backdrop-blur-2xl border border-white/50 shadow-2xl`}
             >
               {/* Default State Content */}
               <motion.div 
-                className={`absolute inset-0 p-12 flex flex-col justify-between transition-opacity duration-300 ${
+                className={`absolute inset-0 p-8 md:p-12 flex flex-col justify-between transition-opacity duration-300 ${
                   hoveredId === exp.id ? 'opacity-0 pointer-events-none' : 'opacity-100'
                 }`}
               >
                 <div>
                   <span 
-                    className="text-sm font-bold uppercase tracking-widest text-gray-500"
+                    className="text-xs md:text-sm font-bold uppercase tracking-widest text-gray-500"
                     style={{ opacity: 0.6 }}
                   >
                     {exp.period}
                   </span>
-                  <h3 className="text-3xl font-black mt-2 mb-1 tracking-tight">{exp.company}</h3>
-                  <p className="text-xl font-medium text-gray-600">{exp.role}</p>
+                  <h3 className="text-2xl md:text-3xl font-black mt-2 mb-1 tracking-tight">{exp.company}</h3>
+                  <p className="text-lg md:text-xl font-medium text-gray-600">{exp.role}</p>
                 </div>
               </motion.div>
 
@@ -128,28 +128,28 @@ export const Experience: React.FC<ExperienceProps> = ({ onHover }) => {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.3, delay: 0.1 }}
-                      className="absolute inset-0 p-12 flex flex-col h-full overflow-y-auto"
+                      className="absolute inset-0 p-8 md:p-12 flex flex-col h-full overflow-y-auto"
                     >
-                      <div className="mb-8 shrink-0 flex items-start justify-between">
+                      <div className="mb-6 md:mb-8 shrink-0 flex flex-col md:flex-row md:items-start justify-between gap-4 md:gap-0">
                         <div>
-                          <span className="text-sm font-bold uppercase tracking-widest text-gray-500">{exp.period}</span>
-                          <h3 className="text-4xl font-black mt-2 mb-1 tracking-tight" style={{ color: exp.color }}>{exp.company}</h3>
-                          <p className="text-xl font-medium text-gray-700">{exp.role}</p>
+                          <span className="text-xs md:text-sm font-bold uppercase tracking-widest text-gray-500">{exp.period}</span>
+                          <h3 className="text-2xl md:text-4xl font-black mt-1 md:mt-2 mb-1 tracking-tight" style={{ color: exp.color }}>{exp.company}</h3>
+                          <p className="text-lg md:text-xl font-medium text-gray-700">{exp.role}</p>
                         </div>
                         {exp.logo && (
-                          <div className={`h-auto shrink-0 ml-4 ${exp.company === '创意传播工作室' ? 'w-48' : 'w-32'}`}>
+                          <div className={`h-auto shrink-0 md:ml-4 w-24 ${exp.company === '创意传播工作室' ? 'md:w-48' : 'md:w-32'}`}>
                             <img src={exp.logo} alt={`${exp.company} logo`} className="w-full h-full object-contain" />
                           </div>
                         )}
                       </div>
                       
-                      <div className="flex-1 overflow-y-auto pr-4 space-y-6 scrollbar-hide">
+                      <div className="flex-1 overflow-y-auto pr-2 md:pr-4 space-y-4 md:space-y-6 scrollbar-hide">
                       {exp.details?.map((detail, index) => (
                         <div key={index} className="flex flex-col">
-                          <h4 className="text-lg font-bold text-gray-900 mb-2">
+                          <h4 className="text-base md:text-lg font-bold text-gray-900 mb-1 md:mb-2">
                             {index + 1}. {detail.title}
                           </h4>
-                          <p className="text-base text-gray-600 leading-relaxed text-justify">
+                          <p className="text-sm md:text-base text-gray-600 leading-relaxed text-justify">
                             {detail.desc}
                           </p>
                         </div>
