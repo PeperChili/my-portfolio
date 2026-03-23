@@ -197,7 +197,7 @@ export const Works: React.FC = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-full max-h-full bg-black rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/20 flex items-center justify-center"
+              className="relative w-full md:w-auto max-w-full max-h-full bg-black rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/20 flex items-center justify-center"
               onClick={e => e.stopPropagation()}
             >
               <button
@@ -210,7 +210,7 @@ export const Works: React.FC = () => {
               {selectedWork.video ? (
                 <video
                   src={selectedWork.video}
-                  className="w-full max-h-[80vh] md:max-h-[85vh] object-contain"
+                  className="w-full md:w-auto max-h-[80vh] md:max-h-[85vh] object-contain"
                   controls
                   autoPlay
                   playsInline
@@ -220,7 +220,7 @@ export const Works: React.FC = () => {
                 <img
                   src={selectedWork.image}
                   alt={selectedWork.title}
-                  className="w-full max-h-[80vh] md:max-h-[85vh] object-contain"
+                  className="w-full md:w-auto max-h-[80vh] md:max-h-[85vh] object-contain"
                 />
               )}
 
