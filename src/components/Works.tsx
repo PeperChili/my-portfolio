@@ -22,10 +22,7 @@ export const Works: React.FC = () => {
       const videoEl = videoRefs.current[work.id];
       if (videoEl && work.video) {
         if (hoveredId === work.id) {
-          // 只有在源地址被赋予后，才进行加载和播放
-          videoEl.load();
           // 当悬浮时，播放视频，并在3秒后重置回开头
-          videoEl.currentTime = 0;
           const playPromise = videoEl.play();
           if (playPromise !== undefined) {
             playPromise.catch(e => console.log("Video play failed:", e));
@@ -123,25 +120,16 @@ export const Works: React.FC = () => {
               <div className={`relative w-full ${work.aspectRatio || 'aspect-[3/4]'}`}>
                 {work.video ? (
                   <>
-                    {/* 使用海报图作为默认显示，并且在悬浮时才加载视频 */}
-                    <img
-                      src={work.image}
-                      alt={work.title}
-                      className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${
-                        hoveredId === work.id ? 'opacity-0 scale-110' : 'opacity-100 scale-100 blur-[4px]'
-                      }`}
-                    />
                     <video
                       ref={el => videoRefs.current[work.id] = el}
-                      src={hoveredId === work.id ? work.video : ''} // 只有悬浮时才赋予 src，避免初始加载大量视频
-                      poster={work.image}
+                      src={work.video}
                       className={`w-full h-full object-cover transition-all duration-700 ease-in-out absolute inset-0 z-10 ${
-                        hoveredId === work.id ? 'scale-110 opacity-100' : 'scale-100 opacity-0'
+                        hoveredId === work.id ? 'scale-110 blur-0 opacity-100' : 'scale-100 blur-[4px] opacity-80'
                       }`}
                       muted
                       playsInline
                       loop={false}
-                      preload="none" // 阻止浏览器预加载视频数据
+                      preload="metadata" // 改为 metadata，这样浏览器会自动加载视频的第一帧作为封面，而不会加载整个视频
                     />
                     {/* Play Icon Indicator */}
                     <div className={`absolute top-4 right-4 md:top-6 md:right-6 z-30 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center border border-white/50 transition-opacity duration-300 ${
